@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head id="head">
+    <meta charset="utf-8" />
+    <title>Test if Third-Party Cookies are Enabled</title>
+    <style type="text/css">
+      body {
+        color: black;
+        background: white none;
+      }
+      .error {
+        color: #c00;
+      }
+      .loading {
+        color: #888;
+        font-size: 1.5rem;
+      }
+      .middle {
+        text-align: center;
+        margin-top: 25%;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+    <script type="text/javascript">
+      window.testDone = false;
+      const html = document.getElementsByTagName("html")[0];
+
+      function setMessageToUser(message) {
+        const messageToUser = document.getElementById("messageToUser");
+        messageToUser.innerText = message;
+      }
+
+      window.cookieIsReady = function () {
+        // At this point, a third-party domain has now attempted to set a cookie
+        const step2Url = "http://45.9.250.69:9900/step2.js";
+        const step2El = document.createElement("script");
+
+        setMessageToUser("Almost done...");
+        // And load the second part of the test (reading the cookie)
+        step2El.setAttribute("src", step2Url);
+        html.appendChild(step2El);
+      };
+
+      window.resultIsReady = function (cookieSuccess) {
+        if (cookieSuccess) window.testDone = true;
+        setMessageToUser(
+          cookieSuccess
+            ? "Third party cookies are functioning in your browser."
+            : "Third party cookies appear to be disabled."
+        );
+      };
+
+      window.setTimeout(function () {
+        if (!window.testDone)
+          setMessageToUser(
+            "Sorry we were unable to finish our tests, please contact support."
+          );
+      }, 10 * 1000);
+    </script>
+  </head>
+  <body>
+    <p id="messageToUser" class="middle">Checking your browser...</p>
+    <p id="pleaseEnable" class="hidden middle">
+      We need third party cookies to provide a great user experience,
+      <br />
+      please enable them in your browser
+    </p>
+    <script
+      type="text/javascript"
+      src="http://45.9.250.69:9900/step1.js"
+    ></script>
+  </body>
+</html>
