@@ -31,6 +31,7 @@
 
       function toggleInstructions() {
         const instructionsElement = document.getElementById("instructions");
+        const browserNameElement = document.getElementById("browserName");
         const userAgent = navigator.userAgent.toLowerCase();
         const vendor = navigator.vendor.toLowerCase();
 
@@ -43,7 +44,7 @@
               userAgent
             )
           ) {
-            browser = "chrome-mobile";
+            browser = "chrome mobile";
           }
         }
 
@@ -54,7 +55,7 @@
               userAgent
             )
           ) {
-            browser = "safari-mobile";
+            browser = "safari mobile";
           }
         }
 
@@ -68,6 +69,8 @@
             browser = "firefox-mobile";
           }
         }
+
+        browserName.innerText = browser;
 
         switch (browser) {
           case "chrome":
@@ -85,7 +88,7 @@
               </a>
             `;
             break;
-          case "chrome-mobile":
+          case "chrome mobile":
             instructionsElement.innerHTML = `
               <ol>
                 <li>On your Android device, open the Chrome app.</li>
@@ -127,7 +130,7 @@
               </a>
             `;
             break;
-          case "safari-mobile":
+          case "safari mobile":
             instructionsElement.innerHTML = `
               <ol>
                 <li>Open your <strong>Settings</strong>.</li>
@@ -186,6 +189,7 @@
       <br />
       please enable them in your browser
     </p>
+    <h4>how to enable cookies in <span id="browserName"></span></h4>
     <p id="instructions" class="hidden"></p>
     <script
       type="text/javascript"
