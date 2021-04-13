@@ -29,6 +29,125 @@
         messageToUser.innerText = message;
       }
 
+      function toggleInstructions() {
+        const instructionsElement = document.getElementById("instructions");
+        const userAgent = navigator.userAgent.toLowerCase();
+        const vendor = navigator.vendor.toLowerCase();
+
+        let browser = "";
+
+        if (userAgent.includes("chrome") && vendor.includes("google")) {
+          browser = "chrome";
+          if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              userAgent
+            )
+          ) {
+            browser = "chrome-mobile";
+          }
+        }
+
+        if (userAgent.includes("safari") && vendor.includes("apple")) {
+          browser = "safari";
+          if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              userAgent
+            )
+          ) {
+            browser = "safari-mobile";
+          }
+        }
+
+        if (userAgent.includes("firefox")) {
+          browser = "firefox";
+          if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              userAgent
+            )
+          ) {
+            browser = "firefox-mobile";
+          }
+        }
+
+        switch (browser) {
+          case "chrome":
+            instructionsElement.innerHTML = `
+              <ol>
+                <li>Select the Chrome menu icon</li>
+                <li>Select Settings.
+                <li>Near the bottom of the page, select Show advanced settings.
+                <li>In the “Privacy” section, select Content settings.</li>
+                <li>Select Allow local data to be set (recommended).
+                <li>Select Done.
+              </ol>
+              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+                Learn how to enable cookies in all browsers
+              </a>
+            `;
+            break;
+          case "chrome-mobile":
+            instructionsElement.innerHTML = `
+              <ol>
+                <li>On your Android device, open the Chrome app.</li>
+                <li>At the top right, tap More More and then Settings.</li>
+                <li>Tap Site settings and then Cookies.</li>
+                <li>Next to &ldquo;Cookies,&rdquo; switch the setting on.</li>
+                <li>To allow third-party cookies, check the box next to &ldquo;Allow third-party cookies.&rdquo;</li>
+              </ol>
+              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+                Learn how to enable cookies in all browsers
+            </a>
+            `;
+            break;
+          case "firefox":
+            instructionsElement.innerHTML = `
+              <ol>
+                <li>Click Tools &gt; Options.</li>
+                <li>Click Privacy in the top panel.</li>
+                <li>Select the checkbox labeled &lsquo;Accept cookies from sites.&rsquo;</li>
+                <li>Select the checkbox labeled &lsquo;Accept third-party cookies.&rsquo;</li>
+                <li>Click OK.</li>
+              </ol>
+              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+                Learn how to enable cookies in all browsers
+              </a>
+            `;
+            break;
+          case "safari":
+            instructionsElement.innerHTML = `
+              <ol>
+                <li>Go to the Safari drop-down menu.</li>
+                <li>Select Preferences.</li>
+                <li>Click Privacy in the top panel.</li>
+                <li>Under &lsquo;Block cookies&rsquo; select the option &lsquo;Never.&rsquo;</li>
+                <li>For increased security, once you have finished using the site, please change the Privacy setting back to Always.</li>
+              </ol>
+              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+                Learn how to enable cookies in all browsers
+              </a>
+            `;
+            break;
+          case "safari-mobile":
+            instructionsElement.innerHTML = `
+              <ol>
+                <li>Open your <strong>Settings</strong>.</li>
+                <li>Scroll down and select <strong>Safari</strong>.</li>
+                <li>Under <strong>Privacy &amp; Security</strong>, turn off &ldquo;<strong>Prevent Cross-Site Tracking&rdquo;</strong> and &ldquo;<strong>Block All Cookies&rdquo;</strong>.</li>
+              </ol>
+              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+                Learn how to enable cookies in all browsers
+              </a>
+            `;
+            break;
+          default:
+            instructionsElement.innerHTML = `
+              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+                Learn how to enable cookies in all browsers
+              </a>
+            `;
+        }
+      }
+
       window.cookieIsReady = function () {
         // At this point, a third-party domain has now attempted to set a cookie
         const step2Url = "https://sinamontazeri.com/test/step2.js.php";
@@ -42,11 +161,14 @@
 
       window.resultIsReady = function (cookieSuccess) {
         if (cookieSuccess) window.testDone = true;
-        setMessageToUser(
-          cookieSuccess
-            ? "Third party cookies are functioning in your browser."
-            : "Third party cookies appear to be disabled."
-        );
+        if (cookieSuccess) {
+          setMessageToUser(
+            "Third party cookies are functioning in your browser. Thank you for your trust."
+          );
+        } else {
+          linkElement.classList.remove("hidden");
+          setMessageToUser("Third party cookies appear to be disabled");
+        }
       };
 
       window.setTimeout(function () {
@@ -64,6 +186,7 @@
       <br />
       please enable them in your browser
     </p>
+    <p id="instructions" class="hidden"></p>
     <script
       type="text/javascript"
       src="https://sinamontazeri.com/test/step1.js.php"
