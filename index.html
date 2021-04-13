@@ -13,8 +13,20 @@
         font-size: 1.5rem;
       }
       .middle {
-        text-align: center;
-        margin-top: 25%;
+        margin: 10% auto;
+        width: fit-content;
+        width: -moz-fit-content;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        background-color: rgb(253, 253, 253);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      ol {
+        text-align: left;
+      }
+      li {
+        margin-top: 0.5rem;
       }
       .hidden {
         display: none;
@@ -31,6 +43,9 @@
 
       function toggleInstructions() {
         const instructionsElement = document.getElementById("instructions");
+        const instructionsWrapperElement = document.getElementById(
+          "instructionsWrapper"
+        );
         const browserNameElement = document.getElementById("browserName");
         const userAgent = navigator.userAgent.toLowerCase();
         const vendor = navigator.vendor.toLowerCase();
@@ -83,7 +98,7 @@
                 <li>Select Allow local data to be set (recommended).
                 <li>Select Done.
               </ol>
-              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+              <a target="_blank" href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
                 Learn how to enable cookies in all browsers
               </a>
             `;
@@ -97,7 +112,7 @@
                 <li>Next to &ldquo;Cookies,&rdquo; switch the setting on.</li>
                 <li>To allow third-party cookies, check the box next to &ldquo;Allow third-party cookies.&rdquo;</li>
               </ol>
-              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+              <a target="_blank" href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
                 Learn how to enable cookies in all browsers
             </a>
             `;
@@ -111,7 +126,7 @@
                 <li>Select the checkbox labeled &lsquo;Accept third-party cookies.&rsquo;</li>
                 <li>Click OK.</li>
               </ol>
-              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+              <a target="_blank" href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
                 Learn how to enable cookies in all browsers
               </a>
             `;
@@ -125,7 +140,7 @@
                 <li>Under &lsquo;Block cookies&rsquo; select the option &lsquo;Never.&rsquo;</li>
                 <li>For increased security, once you have finished using the site, please change the Privacy setting back to Always.</li>
               </ol>
-              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+              <a target="_blank" href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
                 Learn how to enable cookies in all browsers
               </a>
             `;
@@ -137,20 +152,20 @@
                 <li>Scroll down and select <strong>Safari</strong>.</li>
                 <li>Under <strong>Privacy &amp; Security</strong>, turn off &ldquo;<strong>Prevent Cross-Site Tracking&rdquo;</strong> and &ldquo;<strong>Block All Cookies&rdquo;</strong>.</li>
               </ol>
-              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+              <a target="_blank" href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
                 Learn how to enable cookies in all browsers
               </a>
             `;
             break;
           default:
             instructionsElement.innerHTML = `
-              <a href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
+              <a target="_blank" href="https://akohubteam.medium.com/how-to-enable-third-party-cookies-on-your-browsers-f9a8143b8cc5#:~:text=At%20the%20top%20right%2C%20tap,Allow%20third%2Dparty%20cookies.%E2%80%9D">
                 Learn how to enable cookies in all browsers
               </a>
             `;
         }
 
-        instructionsElement.classList.remove("hidden");
+        instructionsWrapperElement.classList.remove("hidden");
       }
 
       window.cookieIsReady = function () {
@@ -185,17 +200,21 @@
     </script>
   </head>
   <body>
-    <p id="messageToUser" class="middle">Checking your browser...</p>
-    <p id="pleaseEnable" class="hidden middle">
-      We need third party cookies to provide a great user experience,
-      <br />
-      please enable them in your browser
-    </p>
-    <p id="instructions" class="hidden"></p>
-    <h4>how to enable cookies in <span id="browserName"></span></h4>
-    <script
-      type="text/javascript"
-      src="https://sinamontazeri.com/test/step1.js.php"
-    ></script>
+    <div class="middle">
+      <p id="messageToUser">Checking your browser...</p>
+      <p id="pleaseEnable" class="hidden">
+        We need third party cookies to provide a great user experience,
+        <br />
+        please enable them in your browser
+      </p>
+      <div id="instructionsWrapper" class="hidden">
+        <h4>how to enable cookies in <span id="browserName"></span></h4>
+        <p id="instructions"></p>
+      </div>
+    </div>
   </body>
+  <script
+    type="text/javascript"
+    src="https://sinamontazeri.com/test/step1.js.php"
+  ></script>
 </html>
