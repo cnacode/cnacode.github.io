@@ -11,11 +11,14 @@
       .loading {
         color: #888;
         font-size: 1.5rem;
+        text-align: center;
       }
       .middle {
-        margin: 10% auto;
-        width: fit-content;
-        width: -moz-fit-content;
+        font-size: 1rem;
+        margin: 5% auto;
+        display: block;
+        width: 90%;
+        min-height: 18rem;
         border: 1px solid #eee;
         border-radius: 5px;
         padding: 0.5rem 1rem;
@@ -169,26 +172,30 @@
       }
 
       window.cookieIsReady = function () {
-        // At this point, a third-party domain has now attempted to set a cookie
-        const step2Url = "https://sinamontazeri.com/test/step2.js.php";
-        const step2El = document.createElement("script");
+        setTimeout(() => {
+          // At this point, a third-party domain has now attempted to set a cookie
+          const step2Url = "https://sinamontazeri.com/test/step2.js.php";
+          const step2El = document.createElement("script");
 
-        setMessageToUser("Almost done...");
-        // And load the second part of the test (reading the cookie)
-        step2El.setAttribute("src", step2Url);
-        html.appendChild(step2El);
+          setMessageToUser("Almost done...");
+          // And load the second part of the test (reading the cookie)
+          step2El.setAttribute("src", step2Url);
+          html.appendChild(step2El);
+        }, 1000);
       };
 
       window.resultIsReady = function (cookieSuccess) {
-        window.testDone = true;
-        if (cookieSuccess) {
-          setMessageToUser(
-            "Third party cookies are functioning in your browser. Thank you for your trust."
-          );
-        } else {
-          toggleInstructions();
-          setMessageToUser("Third party cookies appear to be disabled");
-        }
+        setTimeout(() => {
+          window.testDone = true;
+          if (cookieSuccess) {
+            setMessageToUser(
+              "Third party cookies are functioning in your browser. Thank you for your trust."
+            );
+          } else {
+            toggleInstructions();
+            setMessageToUser("Third party cookies appear to be disabled");
+          }
+        }, 1000);
       };
 
       window.setTimeout(function () {
@@ -196,19 +203,19 @@
           setMessageToUser(
             "Sorry we were unable to finish our tests, please contact support."
           );
-      }, 10 * 1000);
+      }, 12 * 1000);
     </script>
   </head>
   <body>
     <div class="middle">
-      <p id="messageToUser">Checking your browser...</p>
+      <p id="messageToUser" class="loading">Checking your browser...</p>
       <p id="pleaseEnable" class="hidden">
         We need third party cookies to provide a great user experience,
         <br />
         please enable them in your browser
       </p>
       <div id="instructionsWrapper" class="hidden">
-        <h4>how to enable cookies in <span id="browserName"></span></h4>
+        <h4>How to enable cookies on <span id="browserName"></span></h4>
         <p id="instructions"></p>
       </div>
     </div>
