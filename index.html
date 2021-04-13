@@ -172,30 +172,26 @@
       }
 
       window.cookieIsReady = function () {
-        setTimeout(() => {
-          // At this point, a third-party domain has now attempted to set a cookie
-          const step2Url = "https://sinamontazeri.com/test/step2.js.php";
-          const step2El = document.createElement("script");
+        // At this point, a third-party domain has now attempted to set a cookie
+        const step2Url = "https://sinamontazeri.com/test/step2.js.php";
+        const step2El = document.createElement("script");
 
-          setMessageToUser("Almost done...");
-          // And load the second part of the test (reading the cookie)
-          step2El.setAttribute("src", step2Url);
-          html.appendChild(step2El);
-        }, 1000);
+        setMessageToUser("Almost done...");
+        // And load the second part of the test (reading the cookie)
+        step2El.setAttribute("src", step2Url);
+        html.appendChild(step2El);
       };
 
       window.resultIsReady = function (cookieSuccess) {
-        setTimeout(() => {
-          window.testDone = true;
-          if (cookieSuccess) {
-            setMessageToUser(
-              "Third party cookies are functioning in your browser. Thank you for your trust."
-            );
-          } else {
-            toggleInstructions();
-            setMessageToUser("Third party cookies appear to be disabled");
-          }
-        }, 1000);
+        window.testDone = true;
+        if (cookieSuccess) {
+          setMessageToUser(
+            "Third party cookies are functioning in your browser. Thank you for your trust."
+          );
+        } else {
+          toggleInstructions();
+          setMessageToUser("Third party cookies appear to be disabled");
+        }
       };
 
       window.setTimeout(function () {
