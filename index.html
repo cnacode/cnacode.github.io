@@ -149,6 +149,8 @@
               </a>
             `;
         }
+
+        instructionsElement.classList.remove("hidden");
       }
 
       window.cookieIsReady = function () {
@@ -169,7 +171,7 @@
             "Third party cookies are functioning in your browser. Thank you for your trust."
           );
         } else {
-          linkElement.classList.remove("hidden");
+          toggleInstructions();
           setMessageToUser("Third party cookies appear to be disabled");
         }
       };
